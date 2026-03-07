@@ -19,35 +19,44 @@ package com.example;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306",
-                "root", "***")) {
-            DatabaseMetaData metaData = conn.getMetaData();
-            String[] table = {"TABLE"};
-            System.out.println(metaData);
-            List<String> tablesList = new ArrayList<>();
-            try (ResultSet rs = metaData.getTables("people", null, null,
-                    table)) {
-                while (rs.next()) {
-                    String tableName = rs.getString("TABLE_NAME");
-                    String tableName1 = rs.getString(5);//то же, что и выше строка только капсом выведет
-                    tablesList.add(tableName);
-                    System.out.println(tableName.toUpperCase() + tableName1);
-                    try (ResultSet rsColumn = metaData.getColumns("people", null, tableName,
-                            null)) {
-                        System.out.println(tableName.toUpperCase());//повторка
-                        while (rsColumn.next()) {
-                            System.out.println(rsColumn.getString("COLUMN_NAME") + " "
-                                    + rsColumn.getString("TYPE_NAME") + " "
-                                    + rsColumn.getString("COLUMN_SIZE"));
-                        }
+        ResourceBundle resource = ResourceBundle.getBundle("DB_people");
+        String url = resource.getString("url");
+        String username = resource.getString("user");
+        String pass = resource.getString("password");
+        try (Connection conn = DriverManager.getConnection(url,
+                "username", "pass")) {
+            printMetaData(conn);
+        }
+    }
+
+    private static void printMetaData(Connection conn) throws SQLException {
+        DatabaseMetaData metaData = conn.getMetaData();
+        String[] table = {"TABLE"};
+        System.out.println(metaData);
+        List<String> tablesList = new ArrayList<>();
+        try (ResultSet rs = metaData.getTables("people", null, null,
+                table)) {
+            while (rs.next()) {
+                String tableName = rs.getString("TABLE_NAME");
+                String tableName1 = rs.getString(5);//то же, что и выше строка только капсом выведет
+                tablesList.add(tableName);
+                System.out.println(tableName.toUpperCase() + tableName1);
+                try (ResultSet rsColumn = metaData.getColumns("people", null, tableName,
+                        null)) {
+                    System.out.println(tableName.toUpperCase());//повторка
+                    while (rsColumn.next()) {
+                        System.out.println(rsColumn.getString("COLUMN_NAME") + " "
+                                + rsColumn.getString("TYPE_NAME") + " "
+                                + rsColumn.getString("COLUMN_SIZE"));
                     }
                 }
-                System.out.println(tablesList);
-
             }
+            System.out.println(tablesList);
+
         }
     }
 }
