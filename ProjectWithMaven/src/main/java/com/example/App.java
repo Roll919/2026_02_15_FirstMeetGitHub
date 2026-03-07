@@ -27,22 +27,9 @@ public class App {
         String url = resource.getString("url");
         String username = resource.getString("user");
         String pass = resource.getString("password");
-        try (Connection conn = DriverManager.getConnection(url, username, pass);
-             Statement st = conn.createStatement()) {
-            //    printMetaData(conn);
-            try (ResultSet rs = st.executeQuery("SELECT * FROM person")) {//работа с данными
-                ResultSetMetaData rsmd = rs.getMetaData();//работа со структурой
-                int number = rsmd.getColumnCount();
-                while (rs.next()) {
-                    for (int i = 1; i <= number; i++) {
-                        String columnName = rsmd.getColumnName(i);
-                        System.out.print(columnName + " " + rs.getString(i) + " ");
-                        // System.out.print(" " + rs.getString(i));//доставать через индекс
-                        //  System.out.println(" " + rs.getString(columnName));//доставать через имя колонки
-                    }
-                    System.out.println();
-                }
-            }
+        try (Connection conn = DriverManager.getConnection(url,
+                username, pass)) {
+        //    printMetaData(conn);
         }
     }
 
