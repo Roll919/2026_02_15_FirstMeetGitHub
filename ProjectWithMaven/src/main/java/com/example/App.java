@@ -28,7 +28,7 @@ public class App {
         String username = resource.getString("user");
         String pass = resource.getString("password");
         try (Connection conn = DriverManager.getConnection(url,
-                "username", "pass")) {
+                username, pass)) {
             printMetaData(conn);
         }
     }
