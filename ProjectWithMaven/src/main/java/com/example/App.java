@@ -27,7 +27,7 @@ public class App {
             DatabaseMetaData metaData = conn.getMetaData();
             String[] table = {"TABLE"};
             System.out.println(metaData);
-            List tablesList = new ArrayList();
+            List<String> tablesList = new ArrayList<>();
             try (ResultSet rs = metaData.getTables("people", null, null,
                     table)) {
                 while (rs.next()) {
@@ -37,7 +37,7 @@ public class App {
                     System.out.println(tableName.toUpperCase() + tableName1);
                     try (ResultSet rsColumn = metaData.getColumns("people", null, tableName,
                             null)) {
-                        System.out.println(tableName.toUpperCase());
+                        System.out.println(tableName.toUpperCase());//повторка
                         while (rsColumn.next()) {
                             System.out.println(rsColumn.getString("COLUMN_NAME") + " "
                                     + rsColumn.getString("TYPE_NAME") + " "
@@ -45,6 +45,7 @@ public class App {
                         }
                     }
                 }
+                System.out.println(tablesList);
 
             }
         }
