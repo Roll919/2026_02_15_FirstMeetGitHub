@@ -29,7 +29,7 @@ public class App {
         String pass = resource.getString("password");
         try (Connection conn = DriverManager.getConnection(url,
                 username, pass)) {
-            printMetaData(conn);
+        //    printMetaData(conn);
         }
     }
 
