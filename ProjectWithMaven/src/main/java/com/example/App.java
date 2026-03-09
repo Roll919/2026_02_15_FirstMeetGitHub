@@ -31,7 +31,7 @@ public class App {
         String pass = resource.getString("password");
         try (Connection conn = DriverManager.getConnection(url, userName, pass);
              Statement st = conn.createStatement()) {
-            //    printMetaData(conn);
+            //   printMetaData(conn);
             try (ResultSet rs = st.executeQuery("SELECT * FROM person")) {//работа с данными
                 ResultSetMetaData rsmd = rs.getMetaData();//работа со структурой
                 int number = rsmd.getColumnCount();
@@ -46,17 +46,32 @@ public class App {
                 }
             }
             //addFivePersons(st);
-
+            printDataDescSalary(st);
         }
     }
 
+    private static void printDataDescSalary(Statement st) throws SQLException {
+        try (ResultSet rs1 = st.executeQuery("SELECT * FROM people.person WHERE age > 21 ORDER BY salary desc ")) {
+            ResultSetMetaData rsmd = rs1.getMetaData();
+            int number = rsmd.getColumnCount();
+            while (rs1.next()) {
+                for (int i = 1; i <= number; i++) {
+                    String columnName = rsmd.getColumnName(i);
+                    System.out.print(columnName + " " + rs1.getString(i) + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+
     private static void addFivePersons(Statement st) throws SQLException {
         st.executeUpdate("INSERT INTO person (age, salary, passport, addres, dateOfBirthday, dateTimeCreate, timeToLunch, letter) VALUES" +
-         "(22, 11000, 'MP135236', 'st_Pobedy5', '2005-01-02', now(), '131500', 'шестой пошел')," +
-         "(32, 21000, 'MP235236', 'st_Pobedy6', '1995-01-02', now(), '141500', 'седьмой пошел')," +
-         "(42, 31000, 'MP335236', 'st_Pobedy7', '1985-01-02', now(), '151500', 'восьмой пошел')," +
-         "(52, 41000, 'MP435236', 'st_Pobedy8', '1975-01-02', now(), '161500', 'девятый пошел')," +
-         "(62, 51000, 'MP535236', 'st_Pobedy9', '1965-01-02', now(), '171500', 'десятый пошел')");
+                "(22, 11000, 'MP135236', 'st_Pobedy5', '2005-01-02', now(), '131500', 'шестой пошел')," +
+                "(32, 21000, 'MP235236', 'st_Pobedy6', '1995-01-02', now(), '141500', 'седьмой пошел')," +
+                "(42, 31000, 'MP335236', 'st_Pobedy7', '1985-01-02', now(), '151500', 'восьмой пошел')," +
+                "(52, 41000, 'MP435236', 'st_Pobedy8', '1975-01-02', now(), '161500', 'девятый пошел')," +
+                "(62, 51000, 'MP535236', 'st_Pobedy9', '1965-01-02', now(), '171500', 'десятый пошел')");
     }
 
     private static void printMetaData(Connection conn) throws SQLException {
