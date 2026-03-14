@@ -1,0 +1,25 @@
+create database People;
+
+insert into people.person(age, salary, passport, addres, dateOfBirthday, dateTimeCreate, timeToLunch, letter)
+VALUES (21, 1000, 'MP135236', 'st_Pobedy', 20050102, now(),
+        131500, 'первый пошел');
+
+insert into people.person(age, salary, passport, addres, dateOfBirthday, dateTimeCreate, timeToLunch, letter)
+VALUES (31, 2000, 'MP235236', 'st_Pobedy1', 19950102, now(),
+        141500, 'второй пошел');
+
+insert into people.person(age, salary, passport, addres, dateOfBirthday, dateTimeCreate, timeToLunch, letter)
+VALUES (41, 3000, 'MP335236', 'st_Pobedy2', 19850102, now(),
+        151500, 'третий пошел');
+
+insert into people.person(age, salary, passport, addres, dateOfBirthday, dateTimeCreate, timeToLunch, letter)
+VALUES (51, 4000, 'MP435236', 'st_Pobedy3', 19750102, now(),
+        161500, 'четвертый пошел');
+
+insert into people.person(age, salary, passport, addres, dateOfBirthday, dateTimeCreate, timeToLunch, letter)
+VALUES (61, 5000, 'MP535236', 'st_Pobedy4', 19650102, now(),
+        171500, 'пятый пошел');
+
+select * from people.person
+WHERE age > 21
+ORDER BY dateTimeCreate
