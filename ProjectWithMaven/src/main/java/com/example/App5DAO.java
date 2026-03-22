@@ -17,6 +17,21 @@ letter- Текст большого объёма
 Используя аннатации над классом и полями класса DTO создать универсальную реализацию DAO для crud операций,
 используя рефлексию.*/
 
-public class App5DAO {
+import com.example.person.dao.PersonDao;
+import com.example.person.dao.PersonDaoImpl;
+import com.example.person.dto.Person;
 
+import java.sql.SQLException;
+import java.util.Random;
+
+public class App5DAO {
+    public static void main(String[] args) throws SQLException {
+        Integer rand = new Random().nextInt(5);
+        PersonDao personDao = new PersonDaoImpl();
+        Person person1 = Person.builder()
+                .age(DbUtils.arAge[rand])
+                .salary(DbUtils.arSalary[rand])
+                .build();
+        personDao.save(person1);
+    }
 }
