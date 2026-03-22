@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 public interface Constants5 {
     String SQL_ADD_PERSON = "INSERT INTO person (age, salary, passport, address, dateOfBirthday," +
             " dateTimeCreate, timeToLunch, letter) VALUES(?,?,?,?,?,now(),?,?)";
+    String SQL_GET_PERSON = "SELECT * FROM people.person WHERE id = ?";
     Integer NUMBER_ONE = 1;
     Integer NUMBER_FIVE = 5;
 

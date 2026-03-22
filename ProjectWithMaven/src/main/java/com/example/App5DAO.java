@@ -45,7 +45,7 @@ public class App5DAO {
                 .timeToLunch(LocalTime.parse(DbUtils.arTimeToLunch[rand], formatter))
                 .letter(DbUtils.arLetter[rand])
                 .build();
-        //personDao.save(person1);
-        System.out.println(personDao.save(person1));
+        //System.out.println(personDao.save(person1));
+        System.out.println(personDao.get(15L));
     }
 }
