@@ -4,12 +4,8 @@ import com.example.DbUtils;
 import com.example.person.dto.Person;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Random;
-
-import static com.example.DbUtils.*;
+import java.sql.*;
+import static com.example.person.Constants5.NUMBER_ONE;
 import static com.example.person.Constants5.SQL_ADD_PERSON;
 
 public class PersonDaoImpl implements PersonDao {
@@ -17,17 +13,23 @@ public class PersonDaoImpl implements PersonDao {
     @Override
     public Person save(Person person) throws SQLException {
         try (Connection connect = DbUtils.getConnection();
-                PreparedStatement pstm = connect.prepareStatement(SQL_ADD_PERSON)) {
-            Integer rand = new Random().nextInt(5);
-            pstm.setString(1, "arAge[rand]");
-            pstm.setString(2, "arSalary[rand]");
-            pstm.setString(3, arPassport[rand]);
-            pstm.setString(4, arAddress[rand]);
-            pstm.setObject(5, arDateOfBirth[rand]);
-            pstm.setString(6, arTimeToLunch[rand]);
-            pstm.setString(7, arLetter[rand]);
+             PreparedStatement pstm = connect.prepareStatement(SQL_ADD_PERSON,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            pstm.setInt(1, person.getAge());
+            pstm.setInt(2, person.getSalary());
+            pstm.setString(3, person.getPassport());
+            pstm.setString(4, person.getAddress());
+            pstm.setObject(5, person.getDateOfBirthday());
+            pstm.setObject(6, person.getTimeToLunch());
+            pstm.setString(7, person.getLetter());
+            pstm.executeUpdate();
+            try(ResultSet generatedId = pstm.getGeneratedKeys()) {
+                if (generatedId.next()) {
+                    person.setId(generatedId.getInt(NUMBER_ONE));
+                }
             }
-        return null;
+        }
+        return person;
     }
 
 

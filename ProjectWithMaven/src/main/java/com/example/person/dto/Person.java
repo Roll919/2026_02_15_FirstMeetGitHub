@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 @Builder
@@ -15,14 +16,14 @@ import java.time.LocalDateTime;
 @Data
 
 public class Person {
-    private int id;
+    private long id;
     private int age;
     private int salary;
     private String passport;
     private String address;
     private LocalDate dateOfBirthday;
     private LocalDateTime dateTimeCreate;
-    private LocalDateTime timeToLunch;
+    private LocalTime timeToLunch;
     private String letter;
 }
 

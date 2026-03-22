@@ -22,16 +22,30 @@ import com.example.person.dao.PersonDaoImpl;
 import com.example.person.dto.Person;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
+import static com.example.person.Constants5.NUMBER_FIVE;
 
 public class App5DAO {
     public static void main(String[] args) throws SQLException {
-        Integer rand = new Random().nextInt(5);
+        Integer rand = new Random().nextInt(NUMBER_FIVE);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         PersonDao personDao = new PersonDaoImpl();
         Person person1 = Person.builder()
                 .age(DbUtils.arAge[rand])
                 .salary(DbUtils.arSalary[rand])
+                .passport(DbUtils.arPassport[rand])
+                .address(DbUtils.arAddress[rand])
+                .dateOfBirthday(LocalDate.parse(DbUtils.arDateOfBirth[rand]))
+                .dateTimeCreate(LocalDateTime.now())
+                .timeToLunch(LocalTime.parse(DbUtils.arTimeToLunch[rand], formatter))
+                .letter(DbUtils.arLetter[rand])
                 .build();
-        personDao.save(person1);
+        //personDao.save(person1);
+        System.out.println(personDao.save(person1));
     }
 }
