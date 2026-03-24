@@ -28,7 +28,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-import static com.example.person.Constants5.NUMBER_FIVE;
+import static com.example.person.Constants5.*;
 
 public class App5DAO {
     public static void main(String[] args) throws SQLException {
@@ -45,7 +45,24 @@ public class App5DAO {
                 .timeToLunch(LocalTime.parse(DbUtils.arTimeToLunch[rand], formatter))
                 .letter(DbUtils.arLetter[rand])
                 .build();
+
         //System.out.println(personDao.save(person1));
-        System.out.println(personDao.get(15L));
+
+        //System.out.println(personDao.get(15L));
+
+        Person personUpdate = Person.builder()
+                .id(1L)
+                .age(DbUtils.arAge[rand])
+                .salary(DbUtils.arSalary[rand])
+                .passport(DbUtils.arPassport[rand])
+                .address(DbUtils.arAddress[rand])
+                .dateOfBirthday(LocalDate.parse(DbUtils.arDateOfBirth[rand]))
+                .dateTimeCreate(LocalDateTime.now())
+                .timeToLunch(LocalTime.parse(DbUtils.arTimeToLunch[rand], formatter))
+                .letter(UPDATE_SIGN)
+                .build();
+
+        personDao.update(personUpdate);
+        System.out.println(personDao.get(1L));
     }
 }

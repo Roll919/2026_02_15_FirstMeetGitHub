@@ -18,7 +18,7 @@ public class PersonDaoImpl implements PersonDao {
         try (Connection connect = DbUtils.getConnection();
              PreparedStatement pstm = connect.prepareStatement(SQL_ADD_PERSON,
                      Statement.RETURN_GENERATED_KEYS)) {
-            pstm.setInt(1, person.getAge());
+            pstm.setLong(1, person.getAge());
             pstm.setInt(2, person.getSalary());
             pstm.setString(3, person.getPassport());
             pstm.setString(4, person.getAddress());
@@ -64,7 +64,19 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public void update(Person person) throws SQLException {
-
+        try(Connection connect = DbUtils.getConnection();
+        PreparedStatement pstm = connect.prepareStatement(SQL_UPDATE_PERSON)) {
+        pstm.setInt(1, person.getAge());
+            pstm.setInt(2, person.getSalary());
+            pstm.setString(3, person.getPassport());
+            pstm.setString(4, person.getAddress());
+            pstm.setObject(5, person.getDateOfBirthday());
+            pstm.setObject(6, person.getDateTimeCreate());
+            pstm.setObject(7, Time.valueOf(person.getTimeToLunch()));
+            pstm.setString(8, person.getLetter());
+            pstm.setLong(9, person.getId());
+            pstm.executeUpdate();
+        }
     }
 
     @Override
