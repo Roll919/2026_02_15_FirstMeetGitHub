@@ -90,8 +90,8 @@ public class DbUtils {
         try (Connection conn = DbUtils.getConnection();
              PreparedStatement pstm = conn.prepareStatement((SQL_TASK1))) {
             for (int i = 0; i < NUMBERS_OF_TIMES_AR; i++) {
-                pstm.setString(1, arAge[i]);
-                pstm.setString(2, arSalary[i]);
+                pstm.setInt(1, arAge[i]);
+                pstm.setInt(2, arSalary[i]);
                 pstm.setString(3, arPassport[i]);
                 pstm.setString(4, arAddress[i]);
                 pstm.setObject(5, arDateOfBirth[i]);
