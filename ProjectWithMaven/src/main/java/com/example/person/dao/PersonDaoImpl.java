@@ -13,6 +13,7 @@ import static com.example.person.Constants5.*;
 
 public class PersonDaoImpl implements PersonDao {
 
+
     @Override
     public Person save(Person person) throws SQLException {
         try (Connection connect = DbUtils.getConnection();
@@ -64,9 +65,9 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public void update(Person person) throws SQLException {
-        try(Connection connect = DbUtils.getConnection();
-        PreparedStatement pstm = connect.prepareStatement(SQL_UPDATE_PERSON)) {
-        pstm.setInt(1, person.getAge());
+        try (Connection connect = DbUtils.getConnection();
+             PreparedStatement pstm = connect.prepareStatement(SQL_UPDATE_PERSON)) {
+            pstm.setInt(1, person.getAge());
             pstm.setInt(2, person.getSalary());
             pstm.setString(3, person.getPassport());
             pstm.setString(4, person.getAddress());
@@ -81,7 +82,13 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public int delete(Serializable id) throws SQLException {
-        return 0;
+        try (Connection connect = DbUtils.getConnection();
+             PreparedStatement pstm = connect.prepareStatement(SQL_DELETE_PERSON)) {
+            pstm.setObject(1, id);
+            int deletedRow = pstm.executeUpdate();
+            System.out.println("Удалено строк " + deletedRow);
+            return deletedRow;
+        }
     }
 }
 

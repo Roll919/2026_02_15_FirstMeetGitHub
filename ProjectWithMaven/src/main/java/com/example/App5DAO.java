@@ -50,7 +50,7 @@ public class App5DAO {
 
         //System.out.println(personDao.get(15L));
 
-        Person personUpdate = Person.builder()
+        /*Person personUpdate = Person.builder()
                 .id(1L)
                 .age(DbUtils.arAge[rand])
                 .salary(DbUtils.arSalary[rand])
@@ -63,6 +63,8 @@ public class App5DAO {
                 .build();
 
         personDao.update(personUpdate);
-        System.out.println(personDao.get(1L));
+        System.out.println(personDao.get(1L));*/
+
+        personDao.delete(12L);
     }
 }
