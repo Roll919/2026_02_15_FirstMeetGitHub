@@ -16,13 +16,13 @@ public class DbUtils {
             "dateTimeCreate, timeToLunch, letter) VALUES (?,?,?,?,?,now(),?,?)";
     public static final Integer NUMBERS_OF_TIMES_AR = 5;
 
-    private static final String[] arAge = {"22", "32", "42", "52", "62"};
-    private static final String[] arSalary = {"11000", "21000", "31000", "41000", "51000"};
-    private static final String[] arPassport = {"MP135236", "MP335237", "MP335238", "MP335239", "MP335240"};
-    private static final String[] arAddress = {"stPobedy6", "stPobedy7", "stPobedy8", "stPobedy9", "stPobedy10"};
-    private static final String[] arDateOfBirth = {"2005-01-02", "1995-01-02", "1985-01-02", "1975-01-02", "1965-01-02"};
-    private static final String[] arTimeToLunch = {"131500", "141500", "151500", "161500", "171500"};
-    private static final String[] arLetter = {"шестой пошел", "седьмой пошел", "восьмой пошел", "девятый пошел", "десятый пошел"};
+    public static final Integer[] arAge = {22, 32, 42, 52, 62};
+    public static final Integer[] arSalary = {11000, 21000, 31000, 41000, 51000};
+    public static final String[] arPassport = {"MP135236", "MP335237", "MP335238", "MP335239", "MP335240"};
+    public static final String[] arAddress = {"stPobedy6", "stPobedy7", "stPobedy8", "stPobedy9", "stPobedy10"};
+    public static final String[] arDateOfBirth = {"2005-01-02", "1995-01-02", "1985-01-02", "1975-01-02", "1965-01-02"};
+    public static final String[] arTimeToLunch = {"13:15:00", "14:15:00", "15:15:00", "16:15:00", "17:15:00"};
+    public static final String[] arLetter = {"шестой пошел", "седьмой пошел", "восьмой пошел", "девятый пошел", "десятый пошел"};
 
     public static final String TABLE_NAME = "TABLE_NAME";
     public static final String COLUMN_NAME = "COLUMN_NAME";
